@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Antonette 🎂</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Start Screen -->
+  <div class="start-screen" id="startScreen">
+    <button class="start-btn" id="startBtn">START</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main hidden" id="mainContent">
+    <h1 class="banner">🎉 Happy Birthday 🎉</h1>
+    <h2 class="name">Antonette</h2>
+
+    <!-- Replace cake with two pictures -->
+    <div class="photo-gallery">
+      <img src="Nett1.jpg" alt="Antonette 1" class="photo photo1" />
+      <img src="Nett2.jpg" alt="Antonette 2" class="photo photo2" />
+    </div>
+
+    <div class="message" id="message"></div>
+  </div>
+
+  <canvas id="confetti"></canvas>
+
+  <!-- Background Music -->
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    const startBtn = document.getElementById("startBtn");
+    const startScreen = document.getElementById("startScreen");
+    const mainContent = document.getElementById("mainContent");
+    const bgMusic = document.getElementById("bgMusic");
+    const messageEl = document.getElementById("message");
+
+    const fullMessage = `Happy Birthday, Antonette! 🎂✨
+Wishing you a day filled with love, laughter, and all the things that make you smile.
+You deserve nothing but happiness today and every day. May your year ahead be as beautiful, bright, and inspiring as you are. 💐Here’s to more adventures, more dreams coming true, and endless blessings in your life.
+Enjoy your special day to the fullest - you’re truly one of a kind! 💖🎈
+Happy Birthday once again, Antonette! 🎉🎵💫`;
+
+    startBtn.addEventListener("click", () => {
+      startScreen.classList.add("hidden");
+      mainContent.classList.remove("hidden");
+      bgMusic.play();
+      launchConfetti();
+      launchBalloonsAndHearts();
+      typeWriter();
+    });
+
+    /* Typewriter Effect */
+    let i = 0;
+    function typeWriter() {
+      if (i < fullMessage.length) {
+        messageEl.innerHTML += fullMessage.charAt(i);
+        i++;
+        setTimeout(typeWriter, 40);
+      }
+    }
+
+    /* Confetti */
+    const canvas = document.getElementById("confetti");
+    const ctx = canvas.getContext("2d");
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const confettis = [];
+    for (let i = 0; i < 150; i++) {
+      confettis.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height - canvas.height,
+        r: Math.random() * 6 + 4,
+        d: Math.random() * 20 + 10,
+        color: `hsl(${Math.random() * 360}, 100%, 70%)`,
+        tilt: Math.floor(Math.random() * 10) - 10,
+        tiltAngleIncremental: Math.random() * 0.07 + 0.05,
+        tiltAngle: 0,
+      });
+    }
+
+    function drawConfetti() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      confettis.forEach((c) => {
+        ctx.beginPath();
+        ctx.lineWidth = c.r;
+        ctx.strokeStyle = c.color;
+        ctx.moveTo(c.x + c.tilt + c.r / 3, c.y);
+        ctx.lineTo(c.x + c.tilt, c.y + c.tilt + c.r / 3);
+        ctx.stroke();
+      });
+      updateConfetti();
+    }
+
+    function updateConfetti() {
+      confettis.forEach((c) => {
+        c.tiltAngle += c.tiltAngleIncremental;
+        c.y += (Math.cos(c.d) + 3 + c.r / 2) / 2;
+        c.x += Math.sin(c.d);
+        c.tilt = Math.sin(c.tiltAngle) * 15;
+        if (c.y > canvas.height) {
+          c.y = -10;
+          c.x = Math.random() * canvas.width;
+        }
+      });
+    }
+
+    function launchConfetti() {
+      (function animate() {
+        drawConfetti();
+        requestAnimationFrame(animate);
+      })();
+    }
+
+    /* Balloons & Hearts */
+    function launchBalloonsAndHearts() {
+      const colors = ["#ff4081", "#ffeb3b", "#4caf50", "#03a9f4", "#9c27b0"];
+      setInterval(() => {
+        const elem = document.createElement("div");
+        const isHeart = Math.random() > 0.5;
+        elem.classList.add(isHeart ? "heart" : "balloon");
+        elem.style.left = Math.random() * 100 + "vw";
+        elem.style.animationDuration = 6 + Math.random() * 4 + "s";
+        elem.style.fontSize = isHeart ? "2rem" : "3rem";
+        elem.textContent = isHeart ? "❤️" : "🎈";
+        elem.style.color = colors[Math.floor(Math.random() * colors.length)];
+        document.body.appendChild(elem);
+        setTimeout(() => elem.remove(), 10000);
+      }, 800);
+    }
+
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
