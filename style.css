@@ -2,23 +2,25 @@ body {
   margin: 0;
   padding: 0;
   background: url("background.jpg") no-repeat center center fixed;
-  background-size: cover; /* ✅ FULL BACKGROUND IMAGE */
+  background-size: cover;
   font-family: "Poppins", sans-serif;
+  color: #fff;
   overflow-x: hidden;
   overflow-y: auto;
-  color: #fff;
 }
 
-/* ✅ Remove the faded overlay if you want a clear background */
+/* Optional soft overlay for readability */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.3); /* optional dark overlay for contrast */
+  background: rgba(0, 0, 0, 0.3);
   z-index: -1;
 }
 
-/* START SCREEN */
+/* -------------------------
+   🚀 START SCREEN
+-------------------------- */
 .start-screen {
   position: fixed;
   inset: 0;
@@ -50,7 +52,9 @@ body::before {
   display: none;
 }
 
-/* MAIN CONTENT */
+/* -------------------------
+   💖 MAIN CONTENT
+-------------------------- */
 .banner {
   text-align: center;
   font-size: 5rem;
@@ -81,7 +85,9 @@ body::before {
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* PHOTO GALLERY */
+/* -------------------------
+   📸 PHOTO GALLERY
+-------------------------- */
 .photo-gallery {
   display: flex;
   justify-content: center;
@@ -111,7 +117,9 @@ body::before {
   50% { transform: scale(1.03); }
 }
 
-/* TYPEWRITER MESSAGE */
+/* -------------------------
+   ✨ TYPEWRITER MESSAGE
+-------------------------- */
 .message {
   text-align: center;
   color: #fff;
@@ -121,11 +129,14 @@ body::before {
   line-height: 1.8;
   white-space: pre-wrap;
   background: rgba(0, 0, 0, 0.5);
-  padding: 20px 25px;
+  padding: 25px;
   border-radius: 15px;
+  padding-bottom: 80px; /* extra space for smooth scroll */
 }
 
-/* FLOATING DECORATIONS */
+/* -------------------------
+   🎈 FLOATING DECORATIONS
+-------------------------- */
 canvas {
   position: fixed;
   top: 0;
@@ -137,11 +148,11 @@ canvas {
 .balloon, .heart {
   position: absolute;
   bottom: -100px;
+  width: 120px;  /* Bigger and visible */
+  height: 120px;
+  transform-origin: center;
   animation: floatUp linear infinite;
   z-index: 2;
-  width: 100px;   /* Default: maybe 40–60px before */
-  height: 100px;
-  transform-origin: center;
 }
 
 @keyframes floatUp {
@@ -149,7 +160,9 @@ canvas {
   100% { transform: translateY(-110vh); opacity: 0; }
 }
 
-/* RESPONSIVE DESIGN */
+/* -------------------------
+   📱 RESPONSIVE DESIGN
+-------------------------- */
 @media (max-width: 768px) {
   .photo {
     width: 180px;
@@ -157,7 +170,7 @@ canvas {
   }
 
   .banner {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
   }
 
   .name {
