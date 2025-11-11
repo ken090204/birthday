@@ -17,7 +17,6 @@
     <h1 class="banner">🎉 Happy Birthday 🎉</h1>
     <h2 class="name">Antonette</h2>
 
-    <!-- Replace cake with two pictures -->
     <div class="photo-gallery">
       <img src="Nett1.jpg" alt="Antonette 1" class="photo photo1" />
       <img src="Nett2.jpg" alt="Antonette 2" class="photo photo2" />
@@ -28,7 +27,6 @@
 
   <canvas id="confetti"></canvas>
 
-  <!-- Background Music -->
   <audio id="bgMusic" loop>
     <source src="music.mp3" type="audio/mpeg" />
   </audio>
@@ -42,7 +40,8 @@
 
     const fullMessage = `Happy Birthday, Antonette! 🎂✨
 Wishing you a day filled with love, laughter, and all the things that make you smile.
-You deserve nothing but happiness today and every day. May your year ahead be as beautiful, bright, and inspiring as you are. 💐Here’s to more adventures, more dreams coming true, and endless blessings in your life.
+You deserve nothing but happiness today and every day. May your year ahead be as beautiful, bright, and inspiring as you are. 💐
+Here’s to more adventures, more dreams coming true, and endless blessings in your life.
 Enjoy your special day to the fullest - you’re truly one of a kind! 💖🎈
 Happy Birthday once again, Antonette! 🎉🎵💫`;
 
@@ -55,17 +54,18 @@ Happy Birthday once again, Antonette! 🎉🎵💫`;
       typeWriter();
     });
 
-    /* Typewriter Effect */
+    /* ✅ Typewriter with Auto Scroll */
     let i = 0;
     function typeWriter() {
       if (i < fullMessage.length) {
         messageEl.innerHTML += fullMessage.charAt(i);
+        messageEl.scrollIntoView({ behavior: "smooth", block: "end" });
         i++;
         setTimeout(typeWriter, 40);
       }
     }
 
-    /* Confetti */
+    /* 🎊 Confetti */
     const canvas = document.getElementById("confetti");
     const ctx = canvas.getContext("2d");
     canvas.width = window.innerWidth;
@@ -118,7 +118,7 @@ Happy Birthday once again, Antonette! 🎉🎵💫`;
       })();
     }
 
-    /* Balloons & Hearts */
+    /* 🎈 Balloons & Hearts */
     function launchBalloonsAndHearts() {
       const colors = ["#ff4081", "#ffeb3b", "#4caf50", "#03a9f4", "#9c27b0"];
       setInterval(() => {
@@ -127,7 +127,7 @@ Happy Birthday once again, Antonette! 🎉🎵💫`;
         elem.classList.add(isHeart ? "heart" : "balloon");
         elem.style.left = Math.random() * 100 + "vw";
         elem.style.animationDuration = 6 + Math.random() * 4 + "s";
-        elem.style.fontSize = isHeart ? "2rem" : "3rem";
+        elem.style.fontSize = isHeart ? "2.8rem" : "3.8rem";
         elem.textContent = isHeart ? "❤️" : "🎈";
         elem.style.color = colors[Math.floor(Math.random() * colors.length)];
         document.body.appendChild(elem);
